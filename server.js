@@ -5,7 +5,6 @@ import cors from "cors";
 
 const prisma = new PrismaClient();
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 async function seed() {
   const workers = [
@@ -265,7 +264,7 @@ app.post("/login", async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
+  console.log(`Servidor rodando...`);
 });
 
 app.get("/workers/popular", async (req, res) => {
@@ -279,5 +278,36 @@ app.get("/workers/popular", async (req, res) => {
     res.json(workers);
   } catch (error) {
     res.status(500).json({ error: "Erro ao buscar trabalhadores" });
+  }
+});
+
+app.get("/workers/categoria/:category", async (req, res) => {
+  const category = req.params.category;
+  try {
+    const workers = await prisma.worker.findMany({
+      where: {
+        category: {
+          contains: category,
+        },
+      },
+    });
+    res.json(workers);
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao buscar trabalhadores" });
+  }
+});
+
+app.get("/workers/:id", async (req, res) => {
+  const id = parseInt(req.params.id);
+  try {
+    const worker = await prisma.worker.findUnique({
+      where: { id },
+    });
+    if (!worker) {
+      return res.status(404).json({ error: "Trabalhador não encontrado" });
+    }
+    res.json(worker);
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao buscar trabalhador" });
   }
 });
