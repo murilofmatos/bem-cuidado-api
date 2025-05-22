@@ -2,7 +2,7 @@ import { PrismaClient } from "./generated/prisma/index.js";
 
 const prisma = new PrismaClient();
 
-async function main() {
+async function seed() {
   const workers = [
     {
       name: "Maria dos Santos",
@@ -190,7 +190,7 @@ async function main() {
   console.log("✅ Workers seed completed!");
 }
 
-main()
+seed()
   .catch((e) => {
     console.error(e);
     process.exit(1);

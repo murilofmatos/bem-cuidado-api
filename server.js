@@ -7,6 +7,203 @@ const prisma = new PrismaClient();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+async function seed() {
+  const workers = [
+    {
+      name: "Maria dos Santos",
+      rating: 4.7,
+      service: "Cozinheira",
+      description: "Especialista em pratos caseiros e alimentação saudável.",
+      category: "Cozinha",
+    },
+    {
+      name: "João Pereira",
+      rating: 4.2,
+      service: "Churrasqueiro",
+      description:
+        "Atendo eventos e festas com carnes nobres e acompanhamentos.",
+      category: "Cozinha",
+    },
+    {
+      name: "Carla Mendes",
+      rating: 3.9,
+      service: "Babá noturna",
+      description: "Experiência com crianças pequenas, paciente e carinhosa.",
+      category: "Babá",
+    },
+    {
+      name: "Lucas Oliveira",
+      rating: 4.5,
+      service: "Passeador de cães",
+      description: "Amante dos animais, ofereço passeios diários e cuidados.",
+      category: "Pets",
+    },
+    {
+      name: "Ana Clara Silva",
+      rating: 4.9,
+      service: "Cuidadora de idosos",
+      description:
+        "Cuido com atenção e respeito, com experiência em medicação.",
+      category: "Cuidado com Idosos",
+    },
+    {
+      name: "Fernando Rocha",
+      rating: 4.0,
+      service: "Eletricista residencial",
+      description: "Faço pequenos reparos elétricos e instalações simples.",
+      category: "Pequenos Reparos",
+    },
+    {
+      name: "Beatriz Lima",
+      rating: 4.6,
+      service: "Diarista",
+      description: "Limpeza detalhada, rápida e confiável.",
+      category: "Limpeza",
+    },
+    {
+      name: "Carlos Eduardo",
+      rating: 4.3,
+      service: "Montador de móveis",
+      description: "Especialista em montagem de móveis com agilidade.",
+      category: "Pequenos Reparos",
+    },
+    {
+      name: "Juliana Freitas",
+      rating: 3.8,
+      service: "Cozinheira vegana",
+      description: "Preparo pratos veganos saborosos e nutritivos.",
+      category: "Cozinha",
+    },
+    {
+      name: "Rafael Nunes",
+      rating: 4.1,
+      service: "Zelador de pets",
+      description: "Cuido de animais com carinho enquanto você viaja.",
+      category: "Pets",
+    },
+    {
+      name: "Tatiane Ribeiro",
+      rating: 4.4,
+      service: "Lavadora de roupas",
+      description: "Cuido da sua lavanderia com zelo e pontualidade.",
+      category: "Limpeza",
+    },
+    {
+      name: "Marcos Vinícius",
+      rating: 4.0,
+      service: "Encanador",
+      description: "Conserto de vazamentos e instalações hidráulicas simples.",
+      category: "Pequenos Reparos",
+    },
+    {
+      name: "Eliane Souza",
+      rating: 4.8,
+      service: "Babá de fim de semana",
+      description: "Disponível para cuidar das crianças nos finais de semana.",
+      category: "Babá",
+    },
+    {
+      name: "Daniel Castro",
+      rating: 3.7,
+      service: "Cuidador de idosos noturno",
+      description: "Acompanhamento e auxílio noturno com paciência e atenção.",
+      category: "Cuidado com Idosos",
+    },
+    {
+      name: "Luana Martins",
+      rating: 4.6,
+      service: "Cozinheira para eventos",
+      description: "Buffet personalizado para pequenas confraternizações.",
+      category: "Cozinha",
+    },
+    {
+      name: "Rodrigo Lopes",
+      rating: 3.9,
+      service: "Pintor",
+      description: "Pintura interna e externa com acabamento limpo.",
+      category: "Pequenos Reparos",
+    },
+    {
+      name: "Patrícia Gomes",
+      rating: 4.2,
+      service: "Babá em tempo integral",
+      description: "Cuidado integral com atividades lúdicas e educativas.",
+      category: "Babá",
+    },
+    {
+      name: "Henrique Tavares",
+      rating: 3.5,
+      service: "Adestrador de cães",
+      description: "Treinamento básico e reforço positivo para pets.",
+      category: "Pets",
+    },
+    {
+      name: "Viviane Dias",
+      rating: 4.7,
+      service: "Limpeza pós-obra",
+      description: "Serviço completo de limpeza pesada e detalhada.",
+      category: "Limpeza",
+    },
+    {
+      name: "Tiago Almeida",
+      rating: 4.3,
+      service: "Jardinagem básica",
+      description: "Corte de grama e cuidado com plantas pequenas.",
+      category: "Pequenos Reparos",
+    },
+    {
+      name: "Sônia Meireles",
+      rating: 4.5,
+      service: "Cozinheira funcional",
+      description: "Alimentação saudável para dietas específicas.",
+      category: "Cozinha",
+    },
+    {
+      name: "André Mota",
+      rating: 4.1,
+      service: "Lavador de quintal",
+      description: "Limpeza rápida e eficaz de áreas externas.",
+      category: "Limpeza",
+    },
+    {
+      name: "Larissa Cunha",
+      rating: 3.6,
+      service: "Babá bilíngue",
+      description: "Cuido de crianças e ensino inglês básico.",
+      category: "Babá",
+    },
+    {
+      name: "Igor Fernandes",
+      rating: 4.4,
+      service: "Cuidar de idosos com mobilidade reduzida",
+      description: "Auxílio total com carinho e responsabilidade.",
+      category: "Cuidado com Idosos",
+    },
+    {
+      name: "Natália Rezende",
+      rating: 4.9,
+      service: "Organizadora doméstica",
+      description: "Organização de ambientes e otimização de espaços.",
+      category: "Limpeza",
+    },
+  ];
+
+  for (const worker of workers) {
+    await prisma.worker.create({ data: worker });
+  }
+
+  console.log("✅ Workers seed completed!");
+}
+
+seed()
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
+
 app.use(express.json());
 app.use(cors());
 
