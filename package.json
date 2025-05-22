@@ -1,6 +1,8 @@
 {
   "type": "module",
   "scripts": {
+    "start": "node server.js",
+    "build": "prisma generate",
     "dev": "nodemon server.js",
     "seed": "node prisma/seed.js"
   },
