@@ -20,3 +20,14 @@ model User {
   email String @unique
   senha String
 }
+
+model Worker {
+  id          Int     @id @default(autoincrement())
+  name        String
+  rating      Float   @db.Float  
+  service     String
+  description String
+  category    String
+
+  @@map("workers")
+}

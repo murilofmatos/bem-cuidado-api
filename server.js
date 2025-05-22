@@ -70,3 +70,17 @@ app.post("/login", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
+
+app.get("/workers/popular", async (req, res) => {
+  try {
+    const workers = await prisma.worker.findMany({
+      orderBy: {
+        rating: "desc",
+      },
+      take: 10,
+    });
+    res.json(workers);
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao buscar trabalhadores" });
+  }
+});
