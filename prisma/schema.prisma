@@ -10,7 +10,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -24,7 +24,7 @@ model User {
 model Worker {
   id          Int     @id @default(autoincrement())
   name        String
-  rating      Float   @db.Float  
+  rating      Float   @default(0)
   service     String
   description String
   category    String
