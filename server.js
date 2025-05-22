@@ -205,13 +205,15 @@ seed()
 
 app.use(express.json());
 app.use(cors());
+app.use((req, res, next) => {
+  console.log(`Request: ${req.method} : ${req.url}`);
+});
 
 app.get("/", async (req, res) => {
   res.json({ message: "API is running" });
 });
 
 app.post("/users", async (req, res) => {
-  console.log(req.body);
   const { name, email, senha } = req.body;
   if (!name || !email || !senha) {
     return res
