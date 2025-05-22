@@ -266,7 +266,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.listen(() => {
+app.listen(3000, () => {
   console.log(`Servidor rodando...`);
 });
 
